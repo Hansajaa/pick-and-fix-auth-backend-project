@@ -11,6 +11,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm'
 import * as argon2 from 'argon2'
+import {UserRole} from "./user-role.schema";
 
 @Entity('tbl_user')
 export class User extends BaseEntity {
@@ -29,6 +30,9 @@ export class User extends BaseEntity {
 
   @Column()
   password: string
+
+  @OneToMany(() => UserRole, (userRole) => userRole.user)
+  userRoles: UserRole[]
 
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date

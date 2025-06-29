@@ -11,8 +11,8 @@ export class AuthService {
 
     async createUser(user:any){
         const result = await this.dataSourceRepository.query(
-            'CALL create_user(?,?,?,?)',
-            [user?.username, user?.contactNumber, user?.email, await argon2.hash(user?.password)]
+            'CALL create_user(?,?,?,?,?)',
+            [user?.username, user?.contactNumber, user?.email, await argon2.hash(user?.password), user?.role]
         )
 
         return processData(result,1);
