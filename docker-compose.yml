@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  meal-api-dev:
+    container_name: meal-api-${NODE_ENV}
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT}:3000"
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRATION: ${JWT_EXPIRATION}
+      DB_USER: ${DB_USER}
+      DB_PWD: ${DB_PWD}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DATABASE: ${DATABASE}
+    profiles:
+      - development
+
+  meal-api-qa:
+    container_name: meal-api-${NODE_ENV}
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT}:3000"
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRATION: ${JWT_EXPIRATION}
+      DB_USER: ${DB_USER}
+      DB_PWD: ${DB_PWD}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DATABASE: ${DATABASE}
+    profiles:
+      - qa
+  
+  meal-api-prod:
+    container_name: meal-api-${NODE_ENV}
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT}:3000"
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRATION: ${JWT_EXPIRATION}
+      DB_USER: ${DB_USER}
+      DB_PWD: ${DB_PWD}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DATABASE: ${DATABASE}
+    profiles:
+      - production
